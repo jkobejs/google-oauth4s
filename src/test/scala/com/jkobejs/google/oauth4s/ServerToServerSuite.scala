@@ -1,4 +1,4 @@
-package com.jkobejs.cats.google.oauth
+package com.jkobejs.google.oauth4s
 
 import java.time.Instant
 

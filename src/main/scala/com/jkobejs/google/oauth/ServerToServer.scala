@@ -1,4 +1,4 @@
-package com.jkobejs.cats.google.oauth
+package com.jkobejs.google.oauth4s
 
 import java.time.Instant
 
@@ -90,7 +90,7 @@ object ServerToServer {
   /**
    * Exposes function which performs authorization and caches it until token is near to expire.
    */
-  final class Authenticator[F[_]] private[oauth] (
+  final class Authenticator[F[_]] private[oauth4s] (
     private val ref: Ref[F, Option[AuthState]],
     private val client: Client[F],
     private val settings: Settings
@@ -128,20 +128,30 @@ object ServerToServer {
       }
 
     private def makeInitialRequest: F[AuthResponse] =
-      for {
-        privateKey <- SHA256withRSA.buildPrivateKey[F](settings.privateKey.base64Bytes)
-        jwtToken   <- JWTSig.signToString[F, SHA256withRSA](getClaims(settings.claims), privateKey)
-        request    <- createRequest(jwtToken, settings)
-        response   <- client.expect[AuthResponse](request)
-      } yield response
+      settings.privateKey.b64Bytes
+        .map(
+          privateKey =>
+            for {
+              privateKey <- SHA256withRSA.buildPrivateKey[F](privateKey)
+              jwtToken   <- JWTSig.signToString[F, SHA256withRSA](getClaims(settings.claims), privateKey)
+              request    <- createRequest(jwtToken, settings)
+              response   <- client.expect[AuthResponse](request)
+            } yield response
+        )
+        .getOrElse(F.raiseError(new RuntimeException(s"${settings.privateKey} is not in valid Base64 scheme")))
 
     private def makeRequest: F[AuthResponse] =
-      for {
-        privateKey <- SHA256withRSA.buildPrivateKey[F](settings.privateKey.base64Bytes)
-        jwtToken   <- JWTSig.signToString[F, SHA256withRSA](newClaim, privateKey)
-        request    <- createRequest(jwtToken, settings)
-        response   <- client.expect[AuthResponse](request)
-      } yield response
+      settings.privateKey.b64Bytes
+        .map(
+          privateKey =>
+            for {
+              privateKey <- SHA256withRSA.buildPrivateKey[F](privateKey)
+              jwtToken   <- JWTSig.signToString[F, SHA256withRSA](newClaim, privateKey)
+              request    <- createRequest(jwtToken, settings)
+              response   <- client.expect[AuthResponse](request)
+            } yield response
+        )
+        .getOrElse(F.raiseError(new RuntimeException(s"${settings.privateKey} is not in valid Base64 scheme")))
 
     private def createRequest(jwtToken: String, settings: Settings): F[Request[F]] =
       for {

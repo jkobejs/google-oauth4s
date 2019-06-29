@@ -1,7 +1,14 @@
-name := "cats-goauth"
+import microsites._
+
+name := "google-oauth4s"
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.12.8"
+lazy val scala212               = "2.12.8"
+lazy val scala211               = "2.11.12"
+lazy val supportedScalaVersions = List(scala212, scala211)
+
+scalaVersion := scala212
+crossScalaVersions := supportedScalaVersions
 
 scalacOptions ++= Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
@@ -19,7 +26,6 @@ scalacOptions ++= Seq(
   "-Xfuture",                         // Turn on future language features.
   "-Xlint:adapted-args",              // Warn if an argument list is modified to match the receiver.
   "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
-  "-Xlint:constant",                  // Evaluation of a constant arithmetic expression results in an error.
   "-Xlint:delayedinit-select",        // Selecting member of DelayedInit.
   "-Xlint:doc-detached",              // A Scaladoc comment appears to be detached from its element.
   "-Xlint:inaccessible",              // Warn about inaccessible types in method signatures.
@@ -37,27 +43,37 @@ scalacOptions ++= Seq(
   "-Yno-adapted-args",                // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
   "-Ypartial-unification",            // Enable partial unification in type constructor inference
   "-Ywarn-dead-code",                 // Warn when dead code is identified.
-  "-Ywarn-extra-implicit",            // Warn when more than one implicit parameter section is defined.
   "-Ywarn-inaccessible",              // Warn about inaccessible types in method signatures.
   "-Ywarn-infer-any",                 // Warn when a type argument is inferred to be `Any`.
   "-Ywarn-nullary-override",          // Warn when non-nullary `def f()' overrides nullary `def f'.
   "-Ywarn-nullary-unit",              // Warn when nullary methods return Unit.
   "-Ywarn-numeric-widen",             // Warn when numerics are widened.
-  "-Ywarn-unused:implicits",          // Warn if an implicit parameter is unused.
-  "-Ywarn-unused:imports",            // Warn if an import selector is not referenced.
-  "-Ywarn-unused:locals",             // Warn if a local definition is unused.
-  "-Ywarn-unused:params",             // Warn if a value parameter is unused.
-  "-Ywarn-unused:patvars",            // Warn if a variable bound in a pattern is unused.
-  "-Ywarn-unused:privates",           // Warn if a private member is unused.
   "-Ywarn-value-discard"              // Warn when non-Unit expression results are unused.
-)
+) ++
+  (CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, 11)) =>
+      Seq(
+        "-Ywarn-unused-import" // Warn if an import selector is not referenced.
+      )
+    case _ =>
+      Seq(
+        "-Ywarn-extra-implicit",   // Warn when more than one implicit parameter section is defined.
+        "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
+        "-Ywarn-unused:locals",    // Warn if a local definition is unused.
+        "-Ywarn-unused:params",    // Warn if a value parameter is unused.
+        "-Ywarn-unused:patvars",   // Warn if a variable bound in a pattern is unused.
+        "-Ywarn-unused:privates",  // Warn if a private member is unused.
+        "-Ywarn-unused:imports",   // Warn if an import selector is not referenced.
+        "-Xlint:constant"          // Evaluation of a constant arithmetic expression results in an error.
+      )
+  })
 scalacOptions in (Compile, console) --= Seq("-Ywarn-unused:imports", "-Xfatal-warnings")
 
 lazy val library =
   new {
     object Version {
-      val tsec      = "0.0.1-M11"
-      val http4s    = "0.20.0"
+      val tsec      = "0.1.0"
+      val http4s    = "0.20.3"
       val scalatest = "3.0.7"
       val wiremock  = "2.18.0"
     }
@@ -80,4 +96,10 @@ libraryDependencies ++= Seq(
   library.wiremock  % Test
 )
 
-addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
+enablePlugins(MicrositesPlugin)
+micrositeExtraMdFiles := Map(
+  file("README.md") -> ExtraMdFileConfig(
+    "readme.md",
+    "home"
+  )
+)

@@ -1,4 +1,4 @@
-# Cats Google OAuth 2.0
+# Google Oauth 2.0 for Scala
 
 Effectfull API for [Google OAuth 2.0][google-oauth] flows.
 
@@ -7,15 +7,15 @@ Installation
 Publish library locally and then include following line in your `build.sbt`
 
 ```scala
-libraryDependencies += "com.jkobejs" %% "cats-goauth" % "0.0.1-SNAPSHOT"
+libraryDependencies += "com.jkobejs" %% "google-oauth4s" % "0.0.1-SNAPSHOT"
 ```
 
-Server-to-server
+Server to server
 ----------------
 
 To support server-to-server interactions, first create a service account for your project in the Google API Console.
 
-`cats-goauth` offers method for one time authorization and methods for subsequent authorization over time.
+`google-oauth4s` offers method for one time authorization or methods for subsequent authorization over time.
 
 ### Example
 
@@ -24,7 +24,7 @@ import java.time.Instant
 
 import cats.effect._
 import cats.syntax.all._
-import com.jkobejs.cats.google.oauth.ServerToServer
+import com.jkobejs.cats.google.oauth4s.ServerToServer
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
