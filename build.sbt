@@ -68,6 +68,9 @@ scalacOptions ++= Seq(
       )
   })
 scalacOptions in (Compile, console) --= Seq("-Ywarn-unused:imports", "-Xfatal-warnings")
+scalacOptions in Tut --= Seq("-Ywarn-unused:imports", "-Xfatal-warnings")
+
+val tsec = "0.1.0"
 
 lazy val library =
   new {
@@ -97,9 +100,13 @@ libraryDependencies ++= Seq(
 )
 
 enablePlugins(MicrositesPlugin)
-micrositeExtraMdFiles := Map(
-  file("README.md") -> ExtraMdFileConfig(
-    "readme.md",
-    "home"
+micrositeTwitterCreator := "@jkobejs"
+micrositeConfigYaml := ConfigYml(
+  yamlCustomProperties = Map(
+    "tsecVersion"          -> library.Version.tsec,
+    "http4sVersion"        -> library.Version.http4s,
+    "googleOauth4sVersion" -> version.value
   )
 )
+micrositeAuthor := "Josip Grgurica"
+micrositeCompilingDocsTool := WithMdoc
