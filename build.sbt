@@ -110,3 +110,9 @@ micrositeConfigYaml := ConfigYml(
 )
 micrositeAuthor := "Josip Grgurica"
 micrositeCompilingDocsTool := WithMdoc
+micrositeGithubOwner := "jkobejs"
+micrositeGithubRepo := "google-oauth4s"
+micrositePushSiteWith := GitHub4s
+micrositeGithubToken := sys.env.get("GITHUB_TOKEN")
+micrositeBaseUrl := "google-oauth4s"
+includeFilter in Jekyll := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf" | "*.md"

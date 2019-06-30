@@ -6,7 +6,7 @@ section: "home"
 
 # Google Oauth 2.0 for Scala
 
-Effectfull API for [Google OAuth 2.0][google-oauth] flows for Scala which is constrained by cats effect **Sync** typeclass . Currently it supports only server to server interaction.
+Effectfull API for [Google OAuth 2.0][google-oauth] flows for Scala which is constrained by cats effect **Sync** typeclass. Currently it supports only server to server interaction.
 
 Quick start
 ------------
