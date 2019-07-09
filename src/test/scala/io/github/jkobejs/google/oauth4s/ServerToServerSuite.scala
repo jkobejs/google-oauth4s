@@ -119,7 +119,7 @@ class ServerToServerSuite extends FunSuite with BeforeAndAfterAll {
 
     val tokenUpdatesIO =
       fs2.Stream
-        .awakeEvery[IO](1.5.seconds)
+        .awakeEvery[IO](1.6.seconds)
         .map(seconds => mockTokenApi(accessToken + seconds.toSeconds, expiresIn))
         .take(6)
         .compile
