@@ -1,7 +1,22 @@
 import microsites._
 
+inThisBuild(
+  List(
+    organization := "io.github.jkobejs",
+    homepage := Some(url("https://github.com/jkobejs/google-oauth4s")),
+    licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    developers := List(
+      Developer(
+        "jkobejs",
+        "Josip Grgurica",
+        "josip.grgurica@gmail.com",
+        url("https://github.com/jkobejs")
+      )
+    )
+  )
+)
+
 name := "google-oauth4s"
-version := "0.0.1-SNAPSHOT"
 
 lazy val scala212               = "2.12.8"
 lazy val scala211               = "2.11.12"
@@ -79,12 +94,15 @@ lazy val library =
       val http4s    = "0.20.3"
       val scalatest = "3.0.7"
       val wiremock  = "2.18.0"
+      val circe     = "0.11.1"
     }
 
     val tsecCommon        = "io.github.jmcardon"     %% "tsec-common"         % Version.tsec
     val tsecJWTSig        = "io.github.jmcardon"     %% "tsec-jwt-sig"        % Version.tsec
     val http4sBlazeClient = "org.http4s"             %% "http4s-blaze-client" % Version.http4s
     val http4sCirce       = "org.http4s"             %% "http4s-circe"        % Version.http4s
+    val circeCore         = "io.circe"               %% "circe-core"          % Version.circe
+    val circeGeneric      = "io.circe"               %% "circe-generic"       % Version.circe
     val scalaTest         = "org.scalatest"          %% "scalatest"           % Version.scalatest
     val wiremock          = "com.github.tomakehurst" % "wiremock"             % Version.wiremock
 
@@ -114,5 +132,4 @@ micrositeGithubOwner := "jkobejs"
 micrositeGithubRepo := "google-oauth4s"
 micrositePushSiteWith := GitHub4s
 micrositeGithubToken := sys.env.get("GITHUB_TOKEN")
-micrositeBaseUrl := "google-oauth4s"
 includeFilter in Jekyll := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf" | "*.md"

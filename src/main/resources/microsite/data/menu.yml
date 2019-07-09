@@ -1,0 +1,13 @@
+options:
+  - title: Server to server
+    url: server-to-server/index.html
+    menu_section: intro
+
+    nested_options:
+     - title: Auth once
+       url: server-to-server/auth-once.html   
+     - title: Resource
+       url: server-to-server/resource.html
+     - title: Stream
+       url: server-to-server/stream.html
+     
