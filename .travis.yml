@@ -17,7 +17,7 @@ jobs:
         - sbt +test
       name: "Cross version tests and scalafmt check"
     - stage: release
-      script: sbt -Dsbt.gigahorse=false ci-release publishMicrosite
+      script: sbt -Dsbt.gigahorse=false ci-release
       name: "Release to sonatype"
     - stage: publish
       before_install:
