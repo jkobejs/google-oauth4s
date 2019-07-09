@@ -7,6 +7,8 @@ stages:
   - name: test
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
+  - name: publish
+    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
@@ -18,7 +20,11 @@ jobs:
       name: "Cross version tests"
     - stage: release
       script: sbt -Dsbt.gigahorse=false ci-release publishMicrosite
-      name: "Release to sonatype and deploy microsite"
+      name: "Release to sonatype"
+    - stage: publish
+      script: bash scripts/publishMicrosite.sh
+      name: "Publish microsite"
+
 
 cache:
   directories:
