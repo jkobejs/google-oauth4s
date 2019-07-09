@@ -12,10 +12,13 @@ jobs:
   include:
     - stage: check
       script: sbt scalafmtCheckAll scalafmtSbtCheck
+      name: "Scalafmt checks"
     - stage: test
       script: sbt +test
+      name: "Cross version tests"
     - stage: release
       script: sbt ci-release publishMicrosite
+      name: "Release to sonatype and deploy microsite"
 
 cache:
   directories:
