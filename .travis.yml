@@ -17,7 +17,7 @@ jobs:
       script: sbt +test
       name: "Cross version tests"
     - stage: release
-      script: sbt ci-release publishMicrosite
+      script: sbt -Dsbt.gigahorse=false ci-release publishMicrosite
       name: "Release to sonatype and deploy microsite"
 
 cache:
