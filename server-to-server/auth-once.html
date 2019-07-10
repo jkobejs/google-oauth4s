@@ -12,9 +12,9 @@
 <p>We will use <code class="highlighter-rouge">cats.effect.IO</code> effect wrapper to make our computation pure. To be able to use it we need to create context shift and timer which are need for shifting execution and scheduling of tasks.</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">val</span> <span class="nv">ctx</span> <span class="k">=</span> <span class="nv">IO</span><span class="o">.</span><span class="py">contextShift</span><span class="o">(</span><span class="n">global</span><span class="o">)</span>
-<span class="c1">// ctx: ContextShift[IO] = cats.effect.internals.IOContextShift@4db1c130
+<span class="c1">// ctx: ContextShift[IO] = cats.effect.internals.IOContextShift@41fd8e05
 </span><span class="k">implicit</span> <span class="k">val</span> <span class="nv">timer</span> <span class="k">=</span> <span class="nv">IO</span><span class="o">.</span><span class="py">timer</span><span class="o">(</span><span class="n">global</span><span class="o">)</span>
-<span class="c1">// timer: Timer[IO] = cats.effect.internals.IOTimer@7e50a433
+<span class="c1">// timer: Timer[IO] = cats.effect.internals.IOTimer@19c49569
 </span></code></pre></div></div>
 
 <p>To communicate with google auth api we need to create claims and settings. We can do it in two ways, create them manually (private key should we read in a safe way) or read service account key data from google service account key file and use it to create settings.</p>
@@ -45,7 +45,7 @@
   <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">auth</span><span class="o">[</span><span class="kt">IO</span><span class="o">](</span><span class="n">settings</span><span class="o">,</span> <span class="n">global</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// res0: IO[ServerToServer.AuthResponse] = Async(
-//   cats.effect.internals.IOBracket$$$Lambda$6776/582714670@2f601ef2,
+//   cats.effect.internals.IOBracket$$$Lambda$7711/1364152185@57b1da94,
 //   false
 // )
 </span></code></pre></div></div>
@@ -74,7 +74,7 @@
 //   Map(
 //     Bind(
 //       Pure(src/test/resources/service-account.json),
-//       io.github.jkobejs.google.oauth4s.ServiceAccountKeyReader$$$Lambda$6778/748457927@51c3cddb
+//       io.github.jkobejs.google.oauth4s.ServiceAccountKeyReader$$$Lambda$7713/7612392@74764392
 //     ),
 //     &lt;function1&gt;,
 //     0
