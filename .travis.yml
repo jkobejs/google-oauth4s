@@ -21,7 +21,8 @@ jobs:
       name: "Release to sonatype"
     - stage: publish
       before_install:
-          - export PATH=${PATH}:./vendor/bundle
+        - bash scripts/decrypt-keys.sh
+        - export PATH=${PATH}:./vendor/bundle
       install:
         - rvm use 2.6.0 --install --fuzzy
         - gem update --system

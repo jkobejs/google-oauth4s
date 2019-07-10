@@ -131,5 +131,4 @@ micrositeCompilingDocsTool := WithMdoc
 micrositeGithubOwner := "jkobejs"
 micrositeGithubRepo := "google-oauth4s"
 micrositeBaseUrl := "google-oauth4s"
-micrositeGithubToken := sys.env.get("GITHUB_TOKEN")
 includeFilter in Jekyll := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf" | "*.md"
