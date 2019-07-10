@@ -29,4 +29,4 @@ Server to server
 [google-oauth]: https://developers.google.com/identity/protocols/OAuth2
 [tsec]: https://jmcardon.github.io/tsec/
 [http4s]: https://http4s.org/
-[server-to-server]: /server-to-server
+[server-to-server]: /google-oauth4s/server-to-server
