@@ -3,24 +3,13 @@ jdk:
   - oraclejdk8
 
 stages:
-  # - name: test
-  # - name: release
-    # if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
-  - name: publish
-    # if: (tag IS present) AND NOT fork
+  - name: test
+  - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
-    # - stage: test
-      # script: 
-        # - sbt scalafmtCheckAll scalafmtSbtCheck
-        # - sbt +test
-      # name: "Cross version tests and scalafmt check"
-    # - stage: release
-      # script: sbt -Dsbt.gigahorse=false ci-release
-      # name: "Release to sonatype"
-    - stage: publish
+    - stage: test
       before_install:
         - bash scripts/decrypt-keys.sh
         - export PATH=${PATH}:./vendor/bundle
@@ -29,9 +18,14 @@ jobs:
         - gem update --system
         - gem install sass
         - gem install jekyll -v 3.8.5
-      script: bash scripts/publishMicrosite.sh
-      name: "Publish microsite"
-
+      script: 
+        - sbt scalafmtCheckAll scalafmtSbtCheck
+        - sbt +test
+        - sbt makeMicrosite
+      name: "Cross version tests and scalafmt check"
+    - stage: release
+      script: sbt -Dsbt.gigahorse=false ci-release
+      name: "Release to sonatype"
 
 cache:
   directories:
