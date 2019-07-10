@@ -3,22 +3,23 @@ jdk:
   - oraclejdk8
 
 stages:
-  - name: test
-  - name: release
-    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
+  # - name: test
+  # - name: release
+    # if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
   - name: publish
-    if: (tag IS present) AND NOT fork
+    # if: (tag IS present) AND NOT fork
+    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
-    - stage: test
-      script: 
-        - sbt scalafmtCheckAll scalafmtSbtCheck
-        - sbt +test
-      name: "Cross version tests and scalafmt check"
-    - stage: release
-      script: sbt -Dsbt.gigahorse=false ci-release
-      name: "Release to sonatype"
+    # - stage: test
+      # script: 
+        # - sbt scalafmtCheckAll scalafmtSbtCheck
+        # - sbt +test
+      # name: "Cross version tests and scalafmt check"
+    # - stage: release
+      # script: sbt -Dsbt.gigahorse=false ci-release
+      # name: "Release to sonatype"
     - stage: publish
       before_install:
         - bash scripts/decrypt-keys.sh
