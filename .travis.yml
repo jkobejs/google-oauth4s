@@ -7,7 +7,7 @@ stages:
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
   - name: publish
-    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
+    if: (tag IS present) AND NOT fork
 
 jobs:
   include:
@@ -51,3 +51,8 @@ before_cache:
 
 before_install:
   - git fetch --tags
+
+env:
+  global:
+  - secure: "WZqeGBoPbaZ8QPTSqymoMKBS/qNEPgH07bqQfZ340A76ODrEJcJVBv9T9kwT/cUcuwBdWMThKjctOJyJSt9j51EJOxp1rVeIF+N8G1HMzRYCq/l+cIF3INc6Pxka0VvZJf3b3giP7mePcWY4Y2jDx8mf+Dueo/ofLUzjEhPEWr/i9DpukMu67eqc1a/j8MqMTIzueO0fxHVOqVzLWVn5WBGTYrxHHs702wDOaZQZbXinV6LqGE/RsVd9kiWJkLTXO14M5PPEGxaGrzYN+nbSa+6K88Gd98HMl1J2kpiRDrfydGjDPCqnd6GwHtyH+AuNoWhlJsUZMRa+PVPlbLQIJWs6iEv9/EqJC+CNsiNMJv2kkJ6qzlXujtc/MfxN3USGx3e75HlMAY5y6odQ6Zu+3qm7tyLbBqaR2912LFZqx2lGci2or3DKiDicwkn9qgzZx3m54qF1m0f+xHsyMj0fbGgSNQSbRsaXB7gRtXm3g7TItuIA+EqIZaWsluFbKlIFOKAIs4ezpf8Jo4y8zfjYlBxBkT+ejn0aSwB/tC1ZBNR3y5fUIQkgc3SFJAe7Ub4ZZZupTIJLgY5toeLtrr3gemu28tK7NCuIOg95/9sv9yMeMna9d8gRLEmbYNDBocsKgqDWVzb4e0Q61ybPphVt2WGPF5IBrPvF0M411qxXvts="
+
