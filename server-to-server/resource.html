@@ -1,0 +1,122 @@
+<html><head><title>google-oauth4s: Resource</title><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Josip Grgurica" /><meta name="description" content="google-oauth4s" /><meta name="og:image" content="/google-oauth4s/img/poster.png" /><meta name="image" property="og:image" content="/google-oauth4s/img/poster.png" /><meta name="og:title" content="google-oauth4s: Resource" /><meta name="title" property="og:title" content="google-oauth4s: Resource" /><meta name="og:site_name" content="google-oauth4s" /><meta name="og:url" content="https://github.com/jkobejs/google-oauth4s" /><meta name="og:type" content="website" /><meta name="og:description" content="google-oauth4s" /><link rel="icon" type="image/png" href="/google-oauth4s/img/favicon.png" /><meta name="twitter:title" content="google-oauth4s: Resource" /><meta name="twitter:image" content="/google-oauth4s/img/poster.png" /><meta name="twitter:description" content="google-oauth4s" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:creator" content="@jkobejs" /><link rel="icon" type="image/png" sizes="16x16" href="/google-oauth4s/img/favicon16x16.png" /><link rel="icon" type="image/png" sizes="24x24" href="/google-oauth4s/img/favicon24x24.png" /><link rel="icon" type="image/png" sizes="32x32" href="/google-oauth4s/img/favicon32x32.png" /><link rel="icon" type="image/png" sizes="48x48" href="/google-oauth4s/img/favicon48x48.png" /><link rel="icon" type="image/png" sizes="57x57" href="/google-oauth4s/img/favicon57x57.png" /><link rel="icon" type="image/png" sizes="60x60" href="/google-oauth4s/img/favicon60x60.png" /><link rel="icon" type="image/png" sizes="64x64" href="/google-oauth4s/img/favicon64x64.png" /><link rel="icon" type="image/png" sizes="70x70" href="/google-oauth4s/img/favicon70x70.png" /><link rel="icon" type="image/png" sizes="72x72" href="/google-oauth4s/img/favicon72x72.png" /><link rel="icon" type="image/png" sizes="76x76" href="/google-oauth4s/img/favicon76x76.png" /><link rel="icon" type="image/png" sizes="96x96" href="/google-oauth4s/img/favicon96x96.png" /><link rel="icon" type="image/png" sizes="114x114" href="/google-oauth4s/img/favicon114x114.png" /><link rel="icon" type="image/png" sizes="120x120" href="/google-oauth4s/img/favicon120x120.png" /><link rel="icon" type="image/png" sizes="128x128" href="/google-oauth4s/img/favicon128x128.png" /><link rel="icon" type="image/png" sizes="144x144" href="/google-oauth4s/img/favicon144x144.png" /><link rel="icon" type="image/png" sizes="150x150" href="/google-oauth4s/img/favicon150x150.png" /><link rel="icon" type="image/png" sizes="152x152" href="/google-oauth4s/img/favicon152x152.png" /><link rel="icon" type="image/png" sizes="196x196" href="/google-oauth4s/img/favicon196x196.png" /><link rel="icon" type="image/png" sizes="310x310" href="/google-oauth4s/img/favicon310x310.png" /><link rel="icon" type="image/png" sizes="310x150" href="/google-oauth4s/img/favicon310x150.png" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><link rel="stylesheet" href="/google-oauth4s/highlight/styles/default.css" /><link rel="stylesheet" href="/google-oauth4s/css/style.css" /><link rel="stylesheet" href="/google-oauth4s/css/palette.css" /><link rel="stylesheet" href="/google-oauth4s/css/codemirror.css" /></head><body class="docs"><div id="wrapper"><div id="sidebar-wrapper"><ul id="sidebar" class="sidebar-nav"><li class="sidebar-brand"><a href="/google-oauth4s/" class="brand"><div class="brand-wrapper"><span>google-oauth4s</span></div></a></li> <li><a href="/google-oauth4s/server-to-server/index.html" class="">Server to server</a> <ul class="sub_section"> <li><a href="/google-oauth4s/server-to-server/auth-once.html" class="">Auth once</a></li> <li><a href="/google-oauth4s/server-to-server/resource.html" class=" active ">Resource</a></li> <li><a href="/google-oauth4s/server-to-server/stream.html" class="">Stream</a></li></ul></li></ul></div><div id="page-content-wrapper"><div class="nav"><div class="container-fluid"><div class="row"><div class="col-lg-12"><div class="action-menu pull-left clearfix"><a href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a></div><ul class="pull-right"><li id="gh-eyes-item" class="hidden-xs"><a href="https://github.com/jkobejs/google-oauth4s"><i class="fa fa-eye"></i><span>WATCH<span id="eyes" class="label label-default">--</span></span></a></li><li id="gh-stars-item" class="hidden-xs"><a href="https://github.com/jkobejs/google-oauth4s"><i class="fa fa-star-o"></i><span>STARS<span id="stars" class="label label-default">--</span></span></a></li><li><a href="#" onclick="shareSiteTwitter('google-oauth4s google-oauth4s');"><i class="fa fa-twitter"></i></a></li><li><a href="#" onclick="shareSiteFacebook('google-oauth4s google-oauth4s');"><i class="fa fa-facebook"></i></a></li><li><a href="#" onclick="shareSiteGoogle();"><i class="fa fa-google-plus"></i></a></li></ul></div></div></div></div><div id="content" data-github-owner="jkobejs" data-github-repo="google-oauth4s"><div class="content-wrapper"><section><h3 id="resource-example">Resource example</h3>
+
+<p>First we need to import everthing that we need.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.time.Instant</span>
+<span class="k">import</span> <span class="nn">cats.effect._</span>
+<span class="k">import</span> <span class="nn">io.github.jkobejs.google.oauth4s.ServerToServer</span>
+<span class="k">import</span> <span class="nn">io.github.jkobejs.google.oauth4s.ServiceAccountKeyReader</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.duration._</span>
+</code></pre></div></div>
+
+<p>We will use <code class="highlighter-rouge">cats.effect.IO</code> effect wrapper to make our computation pure. To be able to use it we need to create context shift and timer which are need for shifting execution and scheduling of tasks.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">val</span> <span class="nv">ctx</span> <span class="k">=</span> <span class="nv">IO</span><span class="o">.</span><span class="py">contextShift</span><span class="o">(</span><span class="n">global</span><span class="o">)</span>
+<span class="c1">// ctx: ContextShift[IO] = cats.effect.internals.IOContextShift@3db219d9
+</span><span class="k">implicit</span> <span class="k">val</span> <span class="nv">timer</span> <span class="k">=</span> <span class="nv">IO</span><span class="o">.</span><span class="py">timer</span><span class="o">(</span><span class="n">global</span><span class="o">)</span>
+<span class="c1">// timer: Timer[IO] = cats.effect.internals.IOTimer@7b7f5519
+</span></code></pre></div></div>
+
+<p>To communicate with google auth api we need to create claims and settings. We can do it in two ways, create them manually (private key should we read in a safe way) or read service account key data from google service account key file and use it to create settings.</p>
+
+<p>Let’s first do it manually.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="k">val</span> <span class="nv">privateKey</span> <span class="k">=</span> <span class="s">"sample-private-key"</span> <span class="c1">// read it in a safe way
+</span>  <span class="k">val</span> <span class="nv">clientEmail</span> <span class="k">=</span> <span class="s">"sample@email.iam.gserviceaccount.com"</span>
+  <span class="k">val</span> <span class="nv">url</span> <span class="k">=</span> <span class="s">"https://www.googleapis.com/oauth2/v4/token"</span>
+  <span class="k">val</span> <span class="nv">scope</span> <span class="k">=</span> <span class="s">"https://www.googleapis.com/auth/devstorage.read_write"</span>
+  
+  <span class="k">val</span> <span class="nv">claims</span> <span class="k">=</span> <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">GoogleClaims</span><span class="o">(</span>
+    <span class="n">issuer</span> <span class="k">=</span> <span class="n">clientEmail</span><span class="o">,</span>
+    <span class="n">scope</span> <span class="k">=</span> <span class="n">scope</span><span class="o">,</span>
+    <span class="n">audience</span> <span class="k">=</span> <span class="n">url</span><span class="o">,</span>
+    <span class="n">expiration</span> <span class="k">=</span> <span class="nv">Instant</span><span class="o">.</span><span class="py">now</span><span class="o">().</span><span class="py">plusSeconds</span><span class="o">(</span><span class="mi">3600</span><span class="o">),</span>
+    <span class="n">issuedAt</span> <span class="k">=</span> <span class="nv">Instant</span><span class="o">.</span><span class="py">now</span><span class="o">()</span>
+  <span class="o">)</span>
+  
+  <span class="k">val</span> <span class="nv">settings</span> <span class="k">=</span> <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">Settings</span><span class="o">(</span>
+    <span class="n">uri</span> <span class="k">=</span> <span class="s">"https://www.googleapis.com/oauth2/v4/token"</span><span class="o">,</span>
+    <span class="n">privateKey</span> <span class="k">=</span> <span class="n">privateKey</span><span class="o">,</span>
+    <span class="n">grantType</span> <span class="k">=</span> <span class="s">"urn:ietf:params:oauth:grant-type:jwt-bearer"</span><span class="o">,</span>
+    <span class="n">claims</span> <span class="k">=</span> <span class="n">claims</span>
+  <span class="o">)</span>
+
+  <span class="nc">ServerToServer</span>
+      <span class="o">.</span><span class="py">resource</span><span class="o">[</span><span class="kt">IO</span><span class="o">](</span><span class="n">settings</span><span class="o">,</span> <span class="n">global</span><span class="o">)</span>
+      <span class="o">.</span><span class="py">use</span> <span class="o">{</span> <span class="n">authenticator</span> <span class="k">=&gt;</span>
+        <span class="k">for</span> <span class="o">{</span>
+          <span class="n">authResponse1</span> <span class="k">&lt;-</span> <span class="nv">authenticator</span><span class="o">.</span><span class="py">auth</span>
+          <span class="k">_</span>             <span class="k">&lt;-</span> <span class="nv">IO</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mf">2.</span><span class="n">seconds</span><span class="o">)</span>
+          <span class="n">authResponse2</span> <span class="k">&lt;-</span> <span class="nv">authenticator</span><span class="o">.</span><span class="py">auth</span>
+        <span class="o">}</span> <span class="k">yield</span> <span class="nc">List</span><span class="o">(</span><span class="n">authResponse1</span><span class="o">,</span> <span class="n">authResponse2</span><span class="o">)</span>
+      <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// res0: IO[List[ServerToServer.AuthResponse]] = Async(
+//   cats.effect.internals.IOBracket$$$Lambda$6776/582714670@2013df1a,
+//   false
+// )
+</span></code></pre></div></div>
+
+<p>Now lets see how to use <code class="highlighter-rouge">ServiceAccountKey</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">authenticatorResource</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
+  <span class="n">serviceAccountKey</span> <span class="k">&lt;-</span> <span class="nv">Resource</span><span class="o">.</span><span class="py">liftF</span><span class="o">(</span><span class="nv">ServiceAccountKeyReader</span><span class="o">.</span><span class="py">readServiceAccountKey</span><span class="o">[</span><span class="kt">IO</span><span class="o">](</span><span class="s">"src/test/resources/service-account.json"</span><span class="o">,</span> <span class="n">global</span><span class="o">))</span>
+  <span class="n">scope</span> <span class="k">=</span> <span class="s">"https://www.googleapis.com/auth/devstorage.read_write"</span>
+  <span class="n">claims</span> <span class="k">=</span> <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">GoogleClaims</span><span class="o">(</span>
+    <span class="n">issuer</span> <span class="k">=</span> <span class="nv">serviceAccountKey</span><span class="o">.</span><span class="py">client_email</span><span class="o">,</span>
+    <span class="n">scope</span> <span class="k">=</span> <span class="n">scope</span><span class="o">,</span>
+    <span class="n">audience</span> <span class="k">=</span> <span class="nv">serviceAccountKey</span><span class="o">.</span><span class="py">token_uri</span><span class="o">,</span>
+    <span class="n">expiration</span> <span class="k">=</span> <span class="nv">Instant</span><span class="o">.</span><span class="py">now</span><span class="o">().</span><span class="py">plusSeconds</span><span class="o">(</span><span class="mi">3600</span><span class="o">),</span>
+    <span class="n">issuedAt</span> <span class="k">=</span> <span class="nv">Instant</span><span class="o">.</span><span class="py">now</span><span class="o">()</span>
+  <span class="o">)</span>
+  <span class="n">settings</span> <span class="k">=</span>  <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">Settings</span><span class="o">(</span>
+    <span class="n">uri</span> <span class="k">=</span> <span class="nv">serviceAccountKey</span><span class="o">.</span><span class="py">token_uri</span><span class="o">,</span>
+    <span class="n">privateKey</span> <span class="k">=</span> <span class="nv">serviceAccountKey</span><span class="o">.</span><span class="py">private_key</span><span class="o">,</span>
+    <span class="n">grantType</span> <span class="k">=</span> <span class="s">"urn:ietf:params:oauth:grant-type:jwt-bearer"</span><span class="o">,</span>
+    <span class="n">claims</span> <span class="k">=</span> <span class="n">claims</span>
+  <span class="o">)</span>
+ <span class="n">resource</span> <span class="k">&lt;-</span> <span class="nv">ServerToServer</span><span class="o">.</span><span class="py">resource</span><span class="o">[</span><span class="kt">IO</span><span class="o">](</span><span class="n">settings</span><span class="o">,</span> <span class="n">global</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">yield</span> <span class="n">resource</span>
+<span class="c1">// authenticatorResource: Resource[IO, ServerToServer.Authenticator[IO]] = Bind(
+//   Bind(
+//     Suspend(
+//       Map(
+//         Bind(
+//           Pure(src/test/resources/service-account.json),
+//           io.github.jkobejs.google.oauth4s.ServiceAccountKeyReader$$$Lambda$6778/748457927@197a31da
+//         ),
+//         cats.effect.Resource$$$Lambda$6887/831447206@342b8ffd,
+//         0
+//       )
+//     ),
+//     cats.effect.Resource$$Lambda$6888/1898271310@35fdd3fc
+//   ),
+//   &lt;function1&gt;
+// )
+</span>
+<span class="nv">authenticatorResource</span><span class="o">.</span><span class="py">use</span> <span class="o">{</span> <span class="n">authenticator</span> <span class="k">=&gt;</span>
+  <span class="k">for</span> <span class="o">{</span>
+    <span class="n">authResponse1</span> <span class="k">&lt;-</span> <span class="nv">authenticator</span><span class="o">.</span><span class="py">auth</span>
+    <span class="k">_</span>             <span class="k">&lt;-</span> <span class="nv">IO</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mf">2.</span><span class="n">seconds</span><span class="o">)</span>
+    <span class="n">authResponse2</span> <span class="k">&lt;-</span> <span class="nv">authenticator</span><span class="o">.</span><span class="py">auth</span>
+  <span class="o">}</span> <span class="k">yield</span> <span class="nc">List</span><span class="o">(</span><span class="n">authResponse1</span><span class="o">,</span> <span class="n">authResponse2</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// res1: IO[List[ServerToServer.AuthResponse]] = Bind(
+//   Map(
+//     Bind(
+//       Pure(src/test/resources/service-account.json),
+//       io.github.jkobejs.google.oauth4s.ServiceAccountKeyReader$$$Lambda$6778/748457927@197a31da
+//     ),
+//     cats.effect.Resource$$$Lambda$6887/831447206@342b8ffd,
+//     0
+//   ),
+//   cats.effect.Resource$$Lambda$6889/101186296@ba82156
+// )
+</span></code></pre></div></div>
+
+</section></div></div></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="/google-oauth4s/highlight/highlight.pack.js"></script><script>hljs.configure({languages:['scala','java','bash']});
+hljs.initHighlighting();
+              </script><script>((window.gitter = {}).chat = {}).options = {
+room: 'jkobejs/google-oauth4s'};</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js"></script><script src="/google-oauth4s/js/main.js"></script></body></html>
