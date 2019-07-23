@@ -36,7 +36,7 @@ object ServiceAccountKeyReader {
    * @see https://cloud.google.com/iam/docs/creating-managing-service-account-keys
    *
    * @param path path to service account key file
-   * @param ec `ExecutionContext` used to read service account key file, it should be blocking execution context
+   * @param blockingExecutionContext `ExecutionContext` used to read service account key file, it should be blocking execution context
    *
    * @return  side effect that evaluates to [[ServiceAccountKey]]
    */

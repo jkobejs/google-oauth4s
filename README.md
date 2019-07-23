@@ -1,6 +1,6 @@
 # Google Oauth 2.0 for Scala
 
-**google-ouath4s** is effectfull API for [Google OAuth 2.0][google-oauth] flows for Scala.
+**google-ouath4s** is effectful API for [Google OAuth 2.0][google-oauth] flows for Scala.
 
 Please proceed to the [microsite][microsite] for more information.
 
